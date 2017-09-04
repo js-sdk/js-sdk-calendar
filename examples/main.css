@@ -1,0 +1,61 @@
+#calendar {
+    padding: 40px;
+    width: 286px;
+}
+
+#calendar header {
+    margin-bottom: 10px;
+}
+
+#calendar #previous,
+#calendar #next {
+    padding: 0;
+    margin: 0;
+    width: 20px;
+    background: #aaa;
+    color: #fff;
+    border: none;
+}
+
+#calendar .month {
+    font-family: Helvetiva, Arial;
+    font-size: 1.2em;
+    padding: 10px 0px;
+    text-align: center;
+}
+
+.week {
+    font-family: Helvetiva, Arial;
+    display: block;
+}
+
+header,
+.weekdays,
+.week {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1px;
+}
+
+.weekday,
+.day {
+    width: 32px;
+    height: 30px;
+    padding: 0px 4px;
+    text-align: right;
+    font-family: Helvetiva, Arial;
+}
+
+.weekday {
+    padding: 4px;
+}
+
+.weekday:first-child,
+.day:first-child {
+    margin-left: 0px;
+}
+
+.weekday:last-child,
+.day:last-child {
+}

@@ -1,0 +1,23 @@
+{
+  "name": "js-sdk-calendar",
+  "version": "0.1.0",
+  "description": "Simple calendar utility.",
+  "main": "./lib/calendar.js",
+  "repository": "https://github.com/js-sdk/js-sdk-calendar",
+  "author": "Bruno Dias",
+  "license": "Unlicense",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "mocha": "^3.5.0",
+    "should": "^12.0.0"
+  },
+  "dependencies": {
+    "js-sdk-range": "^0.1.1"
+  }
+}
