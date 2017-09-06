@@ -5,6 +5,18 @@ import { rangeIncl } from 'js-sdk-range';
 import * as C from '../src/index.js';
 
 describe("Calendar", () => {
+  context("begin and end of month", () => {
+    it("begin of the month.", () => {
+      const A = new Date(2017, 0, 14);
+      C.beginOfMonth(A).getDate().should.be.eql(1);
+    });
+
+    it("begin of the month.", () => {
+      const A = new Date(2017, 0, 14);
+      C.endOfMonth(A).getDate().should.be.eql(31);
+    });
+  });
+
   context("month", () => {
     it("make calendar of january 2017.", () => {
       const A = new Date(2017, 0, 1);

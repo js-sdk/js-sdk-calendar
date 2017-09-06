@@ -1,9 +1,5 @@
 import { range, rangeIncl } from 'js-sdk-range';
 
-// datetime
-export const beginOfMonth = d => new Date(d.getFullYear(), d.getMonth(), 1);
-export const endOfMonth = d => new Date(d.getFullYear(), d.getMonth() + 1, 0);
-
 // list
 export function chunk(ls, n) {
   let l = ls;
@@ -12,6 +8,9 @@ export function chunk(ls, n) {
     res.push(l.splice(0, n));
   return res;
 }
+
+export const beginOfMonth = d => new Date(d.getFullYear(), d.getMonth(), 1);
+export const endOfMonth = d => new Date(d.getFullYear(), d.getMonth() + 1, 0);
 
 export function month(a) {
   const bm = beginOfMonth(a);
