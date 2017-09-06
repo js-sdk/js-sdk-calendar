@@ -22,14 +22,6 @@
   exports.week = week;
 
 
-  // datetime
-  var beginOfMonth = exports.beginOfMonth = function beginOfMonth(d) {
-    return new Date(d.getFullYear(), d.getMonth(), 1);
-  };
-  var endOfMonth = exports.endOfMonth = function endOfMonth(d) {
-    return new Date(d.getFullYear(), d.getMonth() + 1, 0);
-  };
-
   // list
   function chunk(ls, n) {
     var l = ls;
@@ -38,6 +30,13 @@
       res.push(l.splice(0, n));
     }return res;
   }
+
+  var beginOfMonth = exports.beginOfMonth = function beginOfMonth(d) {
+    return new Date(d.getFullYear(), d.getMonth(), 1);
+  };
+  var endOfMonth = exports.endOfMonth = function endOfMonth(d) {
+    return new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  };
 
   function month(a) {
     var bm = beginOfMonth(a);
