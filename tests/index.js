@@ -11,7 +11,7 @@ describe("Calendar", () => {
       C.beginOfMonth(A).getDate().should.be.eql(1);
     });
 
-    it("begin of the month.", () => {
+    it("end of the month.", () => {
       const A = new Date(2017, 0, 14);
       C.endOfMonth(A).getDate().should.be.eql(31);
     });
