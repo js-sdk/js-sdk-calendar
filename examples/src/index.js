@@ -27,7 +27,7 @@ function createNode(c, f) {
   };
 }
 
-var dayName = d => d > 0 ? d : "";
+var dayName = d => d ? d : "";
 
 function denyEvent(e) {
   if (!e.target.getAttribute('data-day')) {
@@ -64,7 +64,7 @@ function updateCalendar(cache, date, calendar) {
     var week = calendar[i];
     nodeCache[i].forEach((n, d) => {
       var day = week && d < week.length ? week[d] : 0;
-      (day > 0) && n.setAttribute('data-day', day);
+      day && n.setAttribute('data-day', day);
       n.innerHTML = dayName(day);
     });
   });

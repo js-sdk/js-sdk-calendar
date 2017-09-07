@@ -18,8 +18,8 @@ export function monthImpl(d, f) {
 
   const lastDayOfWeek = em.getDay();
 
-  const headDays = (new Array(bm.getDay())).fill(0);
-  const tailDays = (new Array(6 - lastDayOfWeek)).fill(0);
+  const headDays = (new Array(bm.getDay())).fill(null);
+  const tailDays = (new Array(6 - lastDayOfWeek)).fill(null);
 
   return chunk(headDays.concat(
     rangeImpl(1, em.getDate() + 1, 1, f)
@@ -36,7 +36,7 @@ export function weekImpl(d, f) {
   const day = d.getDate();
 
   if (isFirstWeek(d)) {
-    return (new Array(weekday)).fill(0).concat(
+    return (new Array(weekday)).fill(null).concat(
       rangeImpl(
         Math.max(1, day - weekday),
         day + (7 - weekday),
@@ -54,7 +54,7 @@ export function weekImpl(d, f) {
       1,
       f
     ).concat(
-      (new Array(6 - eom.getDay())).fill(0)
+      (new Array(6 - eom.getDay())).fill(null)
     );
   }
 

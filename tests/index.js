@@ -25,18 +25,18 @@ describe("Calendar", () => {
         rangeIncl(8, 14),
         rangeIncl(15, 21),
         rangeIncl(22, 28),
-        [29, 30, 31, 0, 0, 0, 0]
+        [29, 30, 31, null, null, null, null]
       ]);
     });
 
     it("make calendar of february 2017.", () => {
       const A = new Date(2017, 1, 1);
       C.month(A).should.be.eql([
-        [0, 0, 0].concat(rangeIncl(1, 4)),
+        [null, null, null].concat(rangeIncl(1, 4)),
         rangeIncl(5, 11),
         rangeIncl(12, 18),
         rangeIncl(19, 25),
-        [26, 27, 28, 0, 0, 0, 0]
+        [26, 27, 28, null, null, null, null]
       ]);
     });
   });
@@ -79,7 +79,7 @@ describe("Calendar", () => {
     it("first week of february 2017", () => {
       const A = new Date(2017, 1, 1);
       C.week(A).should.be.eql([
-        0, 0, 0, 1, 2, 3, 4,
+        null, null, null, 1, 2, 3, 4,
       ]);
     });
 
@@ -93,7 +93,7 @@ describe("Calendar", () => {
     it("last week of february 2017", () => {
       const A = new Date(2017, 2, 0);
       C.week(A).should.be.eql([
-        26, 27, 28, 0, 0, 0, 0
+        26, 27, 28, null, null, null, null
       ]);
     });
 
@@ -105,7 +105,7 @@ describe("Calendar", () => {
         makeDate(26),
         makeDate(27),
         makeDate(28),
-        0, 0, 0, 0
+        null, null, null, null
       ]);
     });
   });

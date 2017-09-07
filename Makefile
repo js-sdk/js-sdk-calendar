@@ -33,7 +33,7 @@ test:
 	$(MOCHA) $(TEST_CFLAGS) tests/*.js
 
 clean:
-	rm -rf lib dist
+	rm -rf lib dist examples/index.js
 
 clean-all: clean
 	rm -rf node_modules
