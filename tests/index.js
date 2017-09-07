@@ -96,5 +96,17 @@ describe("Calendar", () => {
         26, 27, 28, 0, 0, 0, 0
       ]);
     });
+
+    it("use weekImpl to apply a function for each date.", () => {
+      const A = new Date(2017, 2, 0);
+      const makeDate = x => [2017, 1, x];
+
+      C.weekImpl(A, makeDate).should.be.eql([
+        makeDate(26),
+        makeDate(27),
+        makeDate(28),
+        0, 0, 0, 0
+      ]);
+    });
   });
 });
