@@ -44,8 +44,8 @@
 
     var lastDayOfWeek = em.getDay();
 
-    var headDays = new Array(bm.getDay()).fill(0);
-    var tailDays = new Array(6 - lastDayOfWeek).fill(0);
+    var headDays = new Array(bm.getDay()).fill(null);
+    var tailDays = new Array(6 - lastDayOfWeek).fill(null);
 
     return chunk(headDays.concat((0, _jsSdkRange.rangeImpl)(1, em.getDate() + 1, 1, f)).concat(tailDays), 7);
   }
@@ -68,12 +68,12 @@
     var day = d.getDate();
 
     if (isFirstWeek(d)) {
-      return new Array(weekday).fill(0).concat((0, _jsSdkRange.rangeImpl)(Math.max(1, day - weekday), day + (7 - weekday), 1, f));
+      return new Array(weekday).fill(null).concat((0, _jsSdkRange.rangeImpl)(Math.max(1, day - weekday), day + (7 - weekday), 1, f));
     }
 
     if (isLastWeek(d)) {
       var eom = endOfMonth(d);
-      return (0, _jsSdkRange.rangeImpl)(day - weekday, Math.min(eom.getDate() + 1, day + (7 - weekday)), 1, f).concat(new Array(6 - eom.getDay()).fill(0));
+      return (0, _jsSdkRange.rangeImpl)(day - weekday, Math.min(eom.getDate() + 1, day + (7 - weekday)), 1, f).concat(new Array(6 - eom.getDay()).fill(null));
     }
 
     return (0, _jsSdkRange.rangeImpl)(day - weekday, day + (7 - weekday), 1, f);

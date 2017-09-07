@@ -1,6 +1,6 @@
 {
   "name": "js-sdk-calendar",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "description": "Simple calendar utility.",
   "main": "./lib/calendar.js",
   "repository": "https://github.com/js-sdk/js-sdk-calendar",
