@@ -1,38 +1,26 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'js-sdk-range'], factory);
+    define(['exports', 'js-sdk-range', 'js-sdk-list'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('js-sdk-range'));
+    factory(exports, require('js-sdk-range'), require('js-sdk-list'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.jsSdkRange);
+    factory(mod.exports, global.jsSdkRange, global.jsSdkList);
     global.index = mod.exports;
   }
-})(this, function (exports, _jsSdkRange) {
+})(this, function (exports, _jsSdkRange, _jsSdkList) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.weekC = exports.week = exports.monthC = exports.month = exports.lastWeekOfPreviousMonth = exports.lastWeekOfMonth = exports.firstWeekOfNextMonth = exports.firstWeekOfMonth = exports.endOfPreviousMonth = exports.beginOfNextMonth = exports.endOfMonth = exports.beginOfMonth = exports.rangeInMonth = exports.monthRange = exports.isLastWeek = exports.isFirstWeek = exports.blankList = undefined;
-  exports.chunk = chunk;
   exports.monthImpl = monthImpl;
   exports.monthCImpl = monthCImpl;
   exports.weekImpl = weekImpl;
   exports.weekCImpl = weekCImpl;
-
-
-  // list
-  function chunk(ls, n) {
-    var l = ls;
-    var res = [];
-    while (l.length > 0) {
-      res.push(l.splice(0, n));
-    }return res;
-  }
-
   var blankList = exports.blankList = function blankList(length) {
     return new Array(length).fill(null);
   };
@@ -89,12 +77,12 @@
   function monthImpl(d, f) {
     var bm = beginOfMonth(d);
     var em = endOfMonth(d);
-    return chunk(blankList(bm.getDay()).concat(monthRange(1, em.getDate(), f)).concat(blankList(6 - em.getDay())), 7);
+    return (0, _jsSdkList.chunk)(blankList(bm.getDay()).concat(monthRange(1, em.getDate(), f)).concat(blankList(6 - em.getDay())), 7);
   }
 
   function monthCImpl(d, f) {
     var em = endOfMonth(d);
-    return chunk(lastWeekOfPreviousMonth(d, f).concat(monthRange(1, em.getDate(), f)).concat(firstWeekOfNextMonth(d, f)), 7);
+    return (0, _jsSdkList.chunk)(lastWeekOfPreviousMonth(d, f).concat(monthRange(1, em.getDate(), f)).concat(firstWeekOfNextMonth(d, f)), 7);
   }
 
   var month = exports.month = function month(d) {
