@@ -6,7 +6,7 @@ CFLAGS=--plugins transform-es2015-modules-umd
 TEST_CFLAGS=--compilers js:babel-register --require should
 
 ifeq ("$(DEV)", "1")
-CFLAGS+= -w
+TEST_CFLAGS+= -w
 endif
 
 pre-build:
