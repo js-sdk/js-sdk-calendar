@@ -100,12 +100,12 @@ $ week(d : Date) -> [Number]
 = week(new Date(2017, 0, 1)) == weekImpl(new Date(2017, 0, 1), identity)
 
 
-$ weekCImpl(d : Date, f : Number -> b) -> [b]
+$ weekCImpl(d : Date, f : (Number, Number, Number) -> b) -> [b]
 
 // Generic function to generate a continuous week calendar of 'd'.
 // This function will fill the blank spaces of the week
 // with the next or previous week if needed.
-// Apply 'f' to each day.
+// Apply 'f' to each day. This function will receive the 'year', 'month' and 'day'.
 
 
 $ weekC(d : Date) -> [Number]
@@ -114,7 +114,7 @@ $ weekC(d : Date) -> [Number]
 // This function will fill the blank spaces of the week
 // with the next or previous week if needed.
 
-= weekC(new Date(2017, 0, 1)) == weekCImpl(new Date(2017, 0, 1), identity)
+= weekC(new Date(2017, 0, 1)) == weekCImpl(new Date(2017, 0, 1), (y, m, d) => [y, m, d])
 
 
 $ monthImpl(d : Date, f : Number -> b) : [[b]]
@@ -132,12 +132,12 @@ $ month(date : Date) -> [[Number]]
 = month(new Date(2017, 0, 1)) == monthImpl(new Date(2017, 0, 1), identity)
 
 
-$ monthCImpl(d : Date, f : Number -> b) -> [[b]]
+$ monthCImpl(d : Date, f : (Number, Number, Number) -> b) -> [[b]]
 
 // Generic function to generate a continuous month calendar of 'd'.
 // This function will fill the blank spaces of the week
 // with the next or previous week if needed.
-// Apply 'f' to each day.
+// Apply 'f' to each day. This function will receive the 'year', 'month' and 'day'.
 
 
 $ monthC(d : Date) -> [[Number]]
@@ -146,7 +146,7 @@ $ monthC(d : Date) -> [[Number]]
 // This function will fill the blank spaces of the week
 // with the next or previous week if needed.
 
-= monthC(new Date(2017, 0, 1)) == monthCImpl(new Date(2017, 0, 1), identity)
+= monthC(new Date(2017, 0, 1)) == monthCImpl(new Date(2017, 0, 1), (y, m, d) => [y, m, d])
 ```
 
 

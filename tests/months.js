@@ -32,13 +32,14 @@ export default () => {
   context("continuous", () => {
     it("month of february 2017.", () => {
       const A = new Date(2017, 1, 1);
-      C.monthC(A, x => x).should.be.eql([
-        [29, 30, 31].concat(rangeIncl(1, 4)),
-        rangeIncl(5, 11),
-        rangeIncl(12, 18),
-        rangeIncl(19, 25),
-        [26, 27, 28, 1, 2, 3, 4]
-      ]);
+      C.monthC(A).reduce((acc, week) => {
+        return week.reduce((acc, [_, m, d]) => {
+          acc[m].push(d);
+          return acc;
+        }, acc);
+      }, [[], [], []]).map(
+        days => days.length
+      ).should.be.eql([3, 28, 4]);
     });
   });
 };

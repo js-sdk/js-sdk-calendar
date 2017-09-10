@@ -62,13 +62,21 @@ export function monthImpl(d, f) {
   );
 }
 
+export const applyWithYearAndMonth = (f, date) => {
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  return d => f(y, m, d);
+};
+
 export function monthCImpl(d, f) {
   const em = endOfMonth(d);
+  const ldpm = endOfPreviousMonth(d);
+  const fdnm = beginOfNextMonth(d);
   return chunk(
-    lastWeekOfPreviousMonth(d, f).concat(
-      monthRange(1, em.getDate(), f)
+    lastWeekOfMonth(ldpm, applyWithYearAndMonth(f, ldpm)).concat(
+      monthRange(1, em.getDate(), applyWithYearAndMonth(f, d))
     ).concat(
-      firstWeekOfNextMonth(d, f)
+      firstWeekOfMonth(fdnm, applyWithYearAndMonth(f, fdnm))
     ),
     7
   );
@@ -77,7 +85,8 @@ export function monthCImpl(d, f) {
 export const month = d =>
   monthImpl(d, x => x);
 
-export const monthC = d => monthCImpl(d, x => x);
+export const monthC = d =>
+  monthCImpl(d, (y, m, d) => [y, m, d]);
 
 export function weekImpl(d, f) {
   const weekday = d.getDay();
@@ -100,29 +109,38 @@ export function weekImpl(d, f) {
   );
 }
 
-export const week = date =>
-  weekImpl(date, x => x);
-
 export function weekCImpl(d, f) {
   const weekday = d.getDay();
   const day = d.getDate();
+  const eom = endOfMonth(d);
 
-  if (isFirstWeek(d)) {
-    let lwpm = (day - weekday) == 1 ? [] : lastWeekOfPreviousMonth(d, f);
-    return lwpm.concat(firstWeekOfMonth(d, f));
+  const proxyCurrentDate = applyWithYearAndMonth(f, d);
+
+  if (isFirstWeek(d) && (day - weekday) != 1) {
+    const eopm = endOfPreviousMonth(d);
+    const proxyDate = applyWithYearAndMonth(f, eopm);
+    return lastWeekOfMonth(eom, proxyDate).concat(
+      firstWeekOfMonth(d, proxyCurrentDate)
+    );
   }
 
-  if (isLastWeek(d)) {
-    const eom = endOfMonth(d);
-    let fk = eom.getDay() == 6 ? [] : firstWeekOfNextMonth(d, f);
-    return lastWeekOfMonth(d, f).concat(fk);
+  if (isLastWeek(d) && eom.getDay() != 6) {
+    const bom = beginOfNextMonth(d);
+    const proxyDate = applyWithYearAndMonth(f, bom);
+    return lastWeekOfMonth(d, proxyCurrentDate).concat(
+      firstWeekOfMonth(bom, proxyDate)
+    );
   }
 
   return rangeImpl(
     day - weekday,
     day + (7 - weekday),
-    1, f
+    1, proxyCurrentDate
   );
 }
 
-export const weekC = d => weekCImpl(d, x => x);
+export const week = date =>
+  weekImpl(date, x => x);
+
+export const weekC = d =>
+  weekCImpl(d, (y, m, d) => [y, m, d]);
