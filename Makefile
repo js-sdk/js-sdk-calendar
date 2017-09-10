@@ -1,13 +1,4 @@
-BABEL=./node_modules/babel-cli/bin/babel.js
-BROWSERIFY=./node_modules/browserify/bin/cmd.js
-MOCHA=./node_modules/mocha/bin/mocha
-
-CFLAGS=--plugins transform-es2015-modules-umd
-TEST_CFLAGS=--compilers js:babel-register --require should
-
-ifeq ("$(DEV)", "1")
-TEST_CFLAGS+= -w
-endif
+include builder/compile.mk
 
 pre-build:
 	-mkdir -p lib
@@ -25,9 +16,9 @@ dist/calendar.min.js: src/index.js
 examples/index.js: examples/src/index.js
 	$(BROWSERIFY) $< -d -t babelify --outfile $@
 
-compile: pre-build dist/calendar.js dist/calendar.min.js
+dist-all: pre-build dist/calendar.js dist/calendar.min.js
 
-all: compile lib/calendar.js examples/index.js
+all: test dist-all examples/index.js
 
 test:
 	$(MOCHA) $(TEST_CFLAGS) tests/*.js
