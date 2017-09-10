@@ -16,7 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.weekC = exports.week = exports.monthC = exports.month = exports.lastWeekOfPreviousMonth = exports.lastWeekOfMonth = exports.firstWeekOfNextMonth = exports.firstWeekOfMonth = exports.endOfPreviousMonth = exports.beginOfNextMonth = exports.endOfMonth = exports.beginOfMonth = exports.rangeInMonth = exports.monthRange = exports.isLastWeek = exports.isFirstWeek = exports.blankList = undefined;
+  exports.weekC = exports.week = exports.monthC = exports.month = exports.lastWeekOfPreviousMonth = exports.lastWeekOfMonth = exports.firstWeekOfNextMonth = exports.firstWeekOfMonth = exports.endOfPreviousMonth = exports.beginOfNextMonth = exports.endOfDay = exports.beginOfDay = exports.endOfMonth = exports.beginOfMonth = exports.rangeInMonth = exports.monthRange = exports.isLastWeek = exports.isFirstWeek = exports.blankList = undefined;
   exports.monthImpl = monthImpl;
   exports.monthCImpl = monthCImpl;
   exports.weekImpl = weekImpl;
@@ -48,6 +48,14 @@
 
   var endOfMonth = exports.endOfMonth = function endOfMonth(d) {
     return new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  };
+
+  var beginOfDay = exports.beginOfDay = function beginOfDay(d) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  };
+
+  var endOfDay = exports.endOfDay = function endOfDay(d) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 59);
   };
 
   var beginOfNextMonth = exports.beginOfNextMonth = function beginOfNextMonth(d) {

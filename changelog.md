@@ -1,3 +1,10 @@
+0.4.1 - Sat, 09 Sep 2017 22:14:04 UTC
+-------------------------------------
+
+- [bd0453e](../../commit/bd0453e) adding endOfDay and beginOfDay functions #3
+- [444c8d2](../../commit/444c8d2) added builder as submodule.
+
+
 0.3.3 - Thu, 07 Sep 2017 23:57:14 UTC
 -------------------------------------
 
