@@ -25,6 +25,12 @@ export const beginOfMonth = d =>
 export const endOfMonth = d =>
   new Date(d.getFullYear(), d.getMonth() + 1, 0);
 
+export const beginOfDay = d =>
+  new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+export const endOfDay = d =>
+  new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 59);
+
 export const beginOfNextMonth = d =>
   new Date(d.getFullYear(), d.getMonth() + 1, 1);
 

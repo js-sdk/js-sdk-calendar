@@ -41,6 +41,16 @@ $ endOfMonth(d : Date) -> Date
 // Returns the last day as 'Date' using date 'd'.
 
 
+$ beginOfDay(d : Date) -> Date
+
+// Returns the begin of day as 'Date' using date 'd'.
+
+
+$ endOfDay(d : Date) -> Date
+
+// Returns the end of day as 'Date' using date 'd'.
+
+
 $ beginOfNextMonth(d : Date) -> Date
 
 // Returns the first day of the next month of 'd' as 'Date'.

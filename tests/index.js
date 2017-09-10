@@ -19,6 +19,18 @@ describe("Calendar", () => {
     });
   });
 
+  context("begin and end of day", () => {
+    it("begin of the day.", () => {
+      const A = new Date(2017, 8, 9);
+      C.beginOfDay(A).should.be.eql(new Date(2017, 8, 9, 0, 0, 0, 0));
+    });
+
+    it("end of the day.", () => {
+      const A = new Date(2017, 8, 9);
+      C.endOfDay(A).should.be.eql(new Date(2017, 8, 9, 23, 59, 59, 59));
+    });
+  });
+
   context("first and last week.", () => {
     it("first day of january 2017 is first week.", () => {
       const A = new Date(2017, 0, 1);
