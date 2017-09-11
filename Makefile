@@ -13,12 +13,12 @@ dist/calendar.js: src/index.js
 dist/calendar.min.js: src/index.js
 	$(BABEL) $(CFLAGS) --minified $< -o $@
 
+dist-all: pre-build dist/calendar.js dist/calendar.min.js
+
 examples/index.js: examples/src/index.js
 	$(BROWSERIFY) $< -d -t babelify --outfile $@
 
-dist-all: pre-build dist/calendar.js dist/calendar.min.js
-
-all: test dist-all examples/index.js
+all: test dist-all lib/calendar.js examples/index.js
 
 test:
 	$(MOCHA) $(TEST_CFLAGS) tests/*.js
