@@ -16,15 +16,11 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.weekC = exports.week = exports.monthC = exports.month = exports.lastWeekOfPreviousMonth = exports.lastWeekOfMonth = exports.firstWeekOfNextMonth = exports.firstWeekOfMonth = exports.endOfPreviousMonth = exports.beginOfNextMonth = exports.endOfDay = exports.beginOfDay = exports.endOfMonth = exports.beginOfMonth = exports.rangeInMonth = exports.monthRange = exports.isLastWeek = exports.isFirstWeek = exports.blankList = undefined;
+  exports.weekC = exports.week = exports.monthC = exports.month = exports.applyWithYearAndMonth = exports.lastWeekOfPreviousMonth = exports.lastWeekOfMonth = exports.firstWeekOfNextMonth = exports.firstWeekOfMonth = exports.endOfPreviousMonth = exports.beginOfNextMonth = exports.endOfDay = exports.beginOfDay = exports.endOfMonth = exports.beginOfMonth = exports.rangeInMonth = exports.monthRange = exports.isLastWeek = exports.isFirstWeek = undefined;
   exports.monthImpl = monthImpl;
   exports.monthCImpl = monthCImpl;
   exports.weekImpl = weekImpl;
   exports.weekCImpl = weekCImpl;
-  var blankList = exports.blankList = function blankList(length) {
-    return new Array(length).fill(null);
-  };
-
   var isFirstWeek = exports.isFirstWeek = function isFirstWeek(d) {
     return d.getDate() - d.getDay() < 7;
   };
@@ -85,12 +81,22 @@
   function monthImpl(d, f) {
     var bm = beginOfMonth(d);
     var em = endOfMonth(d);
-    return (0, _jsSdkList.chunk)(blankList(bm.getDay()).concat(monthRange(1, em.getDate(), f)).concat(blankList(6 - em.getDay())), 7);
+    return (0, _jsSdkList.chunk)((0, _jsSdkList.reserve)(bm.getDay()).concat(monthRange(1, em.getDate(), f)).concat((0, _jsSdkList.reserve)(6 - em.getDay())), 7);
   }
+
+  var applyWithYearAndMonth = exports.applyWithYearAndMonth = function applyWithYearAndMonth(f, date) {
+    var y = date.getFullYear();
+    var m = date.getMonth();
+    return function (d) {
+      return f(y, m, d);
+    };
+  };
 
   function monthCImpl(d, f) {
     var em = endOfMonth(d);
-    return (0, _jsSdkList.chunk)(lastWeekOfPreviousMonth(d, f).concat(monthRange(1, em.getDate(), f)).concat(firstWeekOfNextMonth(d, f)), 7);
+    var ldpm = endOfPreviousMonth(d);
+    var fdnm = beginOfNextMonth(d);
+    return (0, _jsSdkList.chunk)(lastWeekOfMonth(ldpm, applyWithYearAndMonth(f, ldpm)).concat(monthRange(1, em.getDate(), applyWithYearAndMonth(f, d))).concat(firstWeekOfMonth(fdnm, applyWithYearAndMonth(f, fdnm))), 7);
   }
 
   var month = exports.month = function month(d) {
@@ -100,8 +106,8 @@
   };
 
   var monthC = exports.monthC = function monthC(d) {
-    return monthCImpl(d, function (x) {
-      return x;
+    return monthCImpl(d, function (y, m, d) {
+      return [y, m, d];
     });
   };
 
@@ -111,15 +117,37 @@
 
     if (isFirstWeek(d)) {
       var bom = beginOfMonth(d);
-      return blankList(bom.getDay()).concat(firstWeekOfMonth(bom, f));
+      return (0, _jsSdkList.reserve)(bom.getDay()).concat(firstWeekOfMonth(bom, f));
     }
 
     if (isLastWeek(d)) {
       var eom = endOfMonth(d);
-      return lastWeekOfMonth(eom, f).concat(blankList(6 - eom.getDay()));
+      return lastWeekOfMonth(eom, f).concat((0, _jsSdkList.reserve)(6 - eom.getDay()));
     }
 
     return (0, _jsSdkRange.rangeImpl)(day - weekday, day + (7 - weekday), 1, f);
+  }
+
+  function weekCImpl(d, f) {
+    var weekday = d.getDay();
+    var day = d.getDate();
+    var eom = endOfMonth(d);
+
+    var proxyCurrentDate = applyWithYearAndMonth(f, d);
+
+    if (isFirstWeek(d) && day - weekday != 1) {
+      var eopm = endOfPreviousMonth(d);
+      var proxyDate = applyWithYearAndMonth(f, eopm);
+      return lastWeekOfMonth(eom, proxyDate).concat(firstWeekOfMonth(d, proxyCurrentDate));
+    }
+
+    if (isLastWeek(d) && eom.getDay() != 6) {
+      var bom = beginOfNextMonth(d);
+      var _proxyDate = applyWithYearAndMonth(f, bom);
+      return lastWeekOfMonth(d, proxyCurrentDate).concat(firstWeekOfMonth(bom, _proxyDate));
+    }
+
+    return (0, _jsSdkRange.rangeImpl)(day - weekday, day + (7 - weekday), 1, proxyCurrentDate);
   }
 
   var week = exports.week = function week(date) {
@@ -128,27 +156,9 @@
     });
   };
 
-  function weekCImpl(d, f) {
-    var weekday = d.getDay();
-    var day = d.getDate();
-
-    if (isFirstWeek(d)) {
-      var lwpm = day - weekday == 1 ? [] : lastWeekOfPreviousMonth(d, f);
-      return lwpm.concat(firstWeekOfMonth(d, f));
-    }
-
-    if (isLastWeek(d)) {
-      var eom = endOfMonth(d);
-      var fk = eom.getDay() == 6 ? [] : firstWeekOfNextMonth(d, f);
-      return lastWeekOfMonth(d, f).concat(fk);
-    }
-
-    return (0, _jsSdkRange.rangeImpl)(day - weekday, day + (7 - weekday), 1, f);
-  }
-
   var weekC = exports.weekC = function weekC(d) {
-    return weekCImpl(d, function (x) {
-      return x;
+    return weekCImpl(d, function (y, m, d) {
+      return [y, m, d];
     });
   };
 });

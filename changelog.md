@@ -1,3 +1,12 @@
+0.4.2 - Mon, 11 Sep 2017 20:21:48 UTC
+-------------------------------------
+
+- [2238711](../../commit/2238711) chore: use reserve from list.
+- [e4ee30c](../../commit/e4ee30c) chore: update makefile.
+- [3cd73fa](../../commit/3cd73fa) chore: add contributing guide.
+- [610148f](../../commit/610148f) continuous calendar with year and month..
+
+
 0.4.1 - Sat, 09 Sep 2017 22:14:04 UTC
 -------------------------------------
 
