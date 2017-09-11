@@ -1,8 +1,5 @@
 import { rangeImpl } from 'js-sdk-range';
-import { chunk } from 'js-sdk-list';
-
-export const blankList = length =>
-  (new Array(length)).fill(null);
+import { chunk, reserve } from 'js-sdk-list';
 
 export const isFirstWeek = d =>
   (d.getDate() - d.getDay()) < 7;
@@ -53,10 +50,10 @@ export function monthImpl(d, f) {
   const bm = beginOfMonth(d);
   const em = endOfMonth(d);
   return chunk(
-      blankList(bm.getDay()).concat(
+      reserve(bm.getDay()).concat(
         monthRange(1, em.getDate(), f)
       ).concat(
-        blankList(6 - em.getDay())
+        reserve(6 - em.getDay())
       ),
     7
   );
@@ -94,12 +91,12 @@ export function weekImpl(d, f) {
 
   if (isFirstWeek(d)) {
     const bom = beginOfMonth(d);
-    return blankList(bom.getDay()).concat(firstWeekOfMonth(bom, f));
+    return reserve(bom.getDay()).concat(firstWeekOfMonth(bom, f));
   }
 
   if (isLastWeek(d)) {
     const eom = endOfMonth(d);
-    return lastWeekOfMonth(eom, f).concat(blankList(6 - eom.getDay()));
+    return lastWeekOfMonth(eom, f).concat(reserve(6 - eom.getDay()));
   }
 
   return rangeImpl(
