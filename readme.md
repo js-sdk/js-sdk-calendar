@@ -1,6 +1,6 @@
 # js-sdk-calendar
 
-[![Build Status](https://travis-ci.org/js-sdk/js-sdk-calendar.svg?branch=master)](https://travis-ci.org/js-sdk/js-sdk-calendar)
+[![Build Status](https://travis-ci.org/js-sdk/js-sdk-calendar.svg?branch=master)](https://travis-ci.org/js-sdk/js-sdk-calendar) [![Coverage Status](https://coveralls.io/repos/github/js-sdk/js-sdk-calendar/badge.svg?branch=master)](https://coveralls.io/github/js-sdk/js-sdk-calendar?branch=master)
 
 Simple calendar utilities.
 
