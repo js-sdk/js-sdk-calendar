@@ -21,10 +21,10 @@ examples/index.js: examples/src/index.js
 all: test dist-all lib/calendar.js examples/index.js
 
 test:
-	$(MOCHA) $(TEST_CFLAGS) tests/*.js
+	$(NYC) $(TEST_REPORT) $(MOCHA) $(TEST_CFLAGS) tests/*.js
 
 clean:
 	rm -rf lib dist examples/index.js
 
 clean-all: clean
-	rm -rf node_modules
+	rm -rf node_modules coverage

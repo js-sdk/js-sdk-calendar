@@ -14,11 +14,19 @@
     "babel-register": "^6.26.0",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
+    "coveralls": "^2.13.1",
     "mocha": "^3.5.0",
+    "nyc": "^11.2.1",
     "should": "^12.0.0"
   },
   "dependencies": {
+    "babel-plugin-istanbul": "^4.1.4",
     "js-sdk-list": "^0.2.1",
     "js-sdk-range": "^0.1.1"
+  },
+  "nyc": {
+    "exclude": [
+      "tests/*.js"
+    ]
   }
 }

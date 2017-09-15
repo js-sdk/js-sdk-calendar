@@ -2,3 +2,5 @@ lib/*
 node_modules/**
 yarn.lock
 builder/**
+coverage/**
+.nyc_output/**
