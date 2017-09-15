@@ -1,5 +1,7 @@
 # js-sdk-calendar
 
+[![Build Status](https://travis-ci.org/js-sdk/js-sdk-calendar.svg?branch=master)](https://travis-ci.org/js-sdk/js-sdk-calendar)
+
 Simple calendar utilities.
 
 ## library
