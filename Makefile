@@ -20,9 +20,6 @@ examples/index.js: examples/src/index.js
 
 all: test dist-all lib/calendar.js examples/index.js
 
-test:
-	$(NYC) $(TEST_REPORT) $(MOCHA) $(TEST_CFLAGS) tests/*.js
-
 clean:
 	rm -rf lib dist examples/index.js
 
