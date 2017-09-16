@@ -10,10 +10,9 @@ export const isLastWeek = d =>
 export const monthRange = (s, e, f) =>
   rangeImpl(s, e + 1, 1, f);
 
-export const rangeInMonth = (d, s, e, f) => {
+export const rangeInMonth = (d, e, f) => {
   const em = endOfMonth(d);
-  return rangeImpl(d.getDate(),
-                   Math.min(e + 1, em.getDate()), 1, f);
+  return rangeImpl(d.getDate(), Math.min(e + 1, em.getDate() + 1), 1, f);
 };
 
 export const beginOfMonth = d =>
@@ -116,7 +115,7 @@ export function weekCImpl(d, f) {
   if (isFirstWeek(d) && (day - weekday) != 1) {
     const eopm = endOfPreviousMonth(d);
     const proxyDate = applyWithYearAndMonth(f, eopm);
-    return lastWeekOfMonth(eom, proxyDate).concat(
+    return lastWeekOfMonth(eopm, proxyDate).concat(
       firstWeekOfMonth(d, proxyCurrentDate)
     );
   }
